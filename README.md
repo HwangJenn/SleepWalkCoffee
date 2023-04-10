@@ -1,8 +1,12 @@
 # SleepWalkCoffee
 ### SleepWalkCoffee 오더앱 제작중
-[프로젝트 상세 설명][노션](https://steep-jaw-d1c.notion.site/iOS-SleepWalkCoffee-App-b860ee4f947e40b1b5ec7ade914d933f)
+### [프로젝트 상세 설명][ 노션 링크 ](https://steep-jaw-d1c.notion.site/iOS-SleepWalkCoffee-App-b860ee4f947e40b1b5ec7ade914d933f)
+
 1. 앱 프로토타입
+
 2. 스토리보드
+<img width="612" alt="스크린샷 2023-04-10 오전 9 24 19" src="https://user-images.githubusercontent.com/76980015/230806385-dbc4853d-5d82-4d8b-940c-6cf9d52c14cf.png">
+
 3. 진행사항
 -앱 프로토타입에 기반한 전체적인 기능 구현
 -사용 프레임워크 UIKit
