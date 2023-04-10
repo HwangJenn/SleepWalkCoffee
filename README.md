@@ -4,6 +4,8 @@
 
 1. 앱 프로토타입
 
+![Untitled](https://user-images.githubusercontent.com/76980015/230806594-a509f3b0-566c-4466-893e-f6104ebbeb07.png)
+
 2. 스토리보드
 <img width="612" alt="스크린샷 2023-04-10 오전 9 24 19" src="https://user-images.githubusercontent.com/76980015/230806385-dbc4853d-5d82-4d8b-940c-6cf9d52c14cf.png">
 
