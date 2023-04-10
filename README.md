@@ -13,6 +13,8 @@
 -앱 프로토타입에 기반한 전체적인 기능 구현
 -사용 프레임워크 UIKit
 -파이어베이스 연동
+<img width="800" alt="스크린샷 2023-04-10 오전 10 17 39" src="https://user-images.githubusercontent.com/76980015/230806783-6f42173d-537e-423b-bc2e-550be90932d5.png">
+
 
 4. 남은 과제
 
