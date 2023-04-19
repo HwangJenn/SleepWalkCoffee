@@ -5,7 +5,7 @@
 //  Created by 황지현 on 2023/01/20.
 //
 
-/* 인앱카드 결제부분 대신 결제 시스템 api, 카카오, 네이버 결제로
+/* 인앱카드 결제부분 대신 결제 시스템 api, 카카오, 네이버 결제로 현재 쓰고있는건 임시
 import UIKit
 import SquareInAppPaymentsSDK 후배한테 빌린 인앱 카드결제
 
