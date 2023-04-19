@@ -29,7 +29,7 @@ class OrderVC: UIViewController {
         
         Firestore.firestore().collection("coffees").getDocuments { querySnapshot, error in
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("에러: \(error)")
             } else {
                 if let documents = querySnapshot?.documents {
                     self.coffees.removeAll()
@@ -42,7 +42,7 @@ class OrderVC: UIViewController {
         }
         Firestore.firestore().collection("beverages").getDocuments { querySnapshot, error in
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("에러: \(error)")
             } else {
                 if let documents = querySnapshot?.documents {
                     self.beverages.removeAll()

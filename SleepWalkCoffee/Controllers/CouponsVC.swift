@@ -26,7 +26,7 @@ class CouponsVC: UIViewController {
         couponsCollectionView.delegate = self
         Firestore.firestore().collection("coupons").getDocuments { querySnapshot, error in
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("에러: \(error)")
             } else {
                 if let documents = querySnapshot?.documents {
                     self.coupons.removeAll()

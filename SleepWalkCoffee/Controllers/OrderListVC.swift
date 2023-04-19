@@ -113,8 +113,8 @@ extension OrderListVC: OrderViewControllerDelegate {
 
     private func didChargeSuccessfully() {
         // Let user know that the charge was successful
-        let alert = UIAlertController(title: "Your order was successful",
-                                      message: "Go to your Square dashbord to see this order reflected in the sales tab.",
+        let alert = UIAlertController(title: "주문이 완료되었습니다.",
+                                      message: "주문이 완료되었습니다.",
                                       preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)

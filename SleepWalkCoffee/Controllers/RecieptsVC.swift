@@ -19,7 +19,7 @@ class RecieptsVC: UIViewController {
         recieptTableView.delegate = self
         Firestore.firestore().collection("receipts").getDocuments { querySnapshot, error in
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("에러: \(error)")
             } else {
                 if let documents = querySnapshot?.documents {
                     self.reciepts.removeAll()

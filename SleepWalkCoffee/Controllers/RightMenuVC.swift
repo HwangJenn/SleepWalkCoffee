@@ -19,7 +19,7 @@ class RightMenuVC: UIViewController {
         tableView.dataSource = self
         Firestore.firestore().collection("Alarm").getDocuments { querySnapshot, error in
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("에러: \(error)")
             } else {
                 self.notifications.removeAll()
                 for document in querySnapshot!.documents {
