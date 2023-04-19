@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SquareInAppPaymentsSDK
+// import SquareInAppPaymentsSDK 후배한테 빌린 인앱 카드결제
 
 protocol OrderViewControllerDelegate: AnyObject {
     func didRequestPayWithCard()

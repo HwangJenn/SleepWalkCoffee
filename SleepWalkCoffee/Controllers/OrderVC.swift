@@ -126,9 +126,9 @@ enum OrderOptionTwo: String {
 }
 
 enum OrderOptionThree: String {
-    case moreWater = "물 많이"
-    case waterCube = "물 보통"
-    case lessWater = "물 적게"
+    case moreWater = "물(우유) 많이"
+    case waterCube = "물(우유) 보통"
+    case lessWater = "물(우유) 적게"
 }
 
 enum OrderOptionFour: String {

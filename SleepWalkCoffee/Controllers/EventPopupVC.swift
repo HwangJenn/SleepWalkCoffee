@@ -16,7 +16,7 @@ class EventPopupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         menuTableView.dataSource = self
-        Firestore.firestore().collection("신메뉴").getDocuments { querySnapshot, error in
+        Firestore.firestore().collection("events").getDocuments { querySnapshot, error in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {

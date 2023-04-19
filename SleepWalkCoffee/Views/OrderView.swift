@@ -18,7 +18,7 @@ class OrderView : UIView {
         return view
     }()
 
-    lazy var addCardButton = ActionButton(backgroundColor: UIColor.black, title: "신용 카드 결제", image: nil)
+    lazy var addCardButton = ActionButton(backgroundColor: UIColor.black, title: "신용 카드 결제", image: nil) //인앱?
     private lazy var headerView = HeaderView(title: "주문하기")
 
     var closeButton: UIButton {

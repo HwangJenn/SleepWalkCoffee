@@ -17,7 +17,7 @@ class RightMenuVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
-        Firestore.firestore().collection("news").getDocuments { querySnapshot, error in
+        Firestore.firestore().collection("Alarm").getDocuments { querySnapshot, error in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {

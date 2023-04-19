@@ -26,6 +26,5 @@ class ReceiptInfoVC: UIViewController {
             timeLabel.text = Int(time.seconds).getTime()
         }
         priceLabel.text = receipt?["price"] as? String
-        branchLabel.text = receipt?["branch"] as? String
     }
 }

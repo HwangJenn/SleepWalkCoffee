@@ -9,7 +9,8 @@ import UIKit
 import FirebaseFirestore
 import SquareInAppPaymentsSDK
 
-struct Constants {
+//카드 결제(후배한테 빌린것)
+/* struct Constants {
 
     struct Square {
         static let SQUARE_LOCATION_ID: String = "L7AMX3MDWZZJQ"
@@ -17,7 +18,7 @@ struct Constants {
         static let ACCESS_TOKEN: String = "EAAAEOlLSlCSYQL88KVM6FU0VCmwYozJbNwv0cNwovFwdilrmSL5orSZmn9cb8MM"
         static let CHARGE_URL: String = "https://connect.squareupsandbox.com/v2/payments"
     }
-}
+} */
 
 var orders = [[String: Any]]()
 var actualPrice = 0
@@ -174,7 +175,6 @@ extension OrderListVC: SQIPCardEntryViewControllerDelegate {
                 "isCouponUsed": isCouponUsed,
                 "name": name,
                 "price": price,
-                "branch": branch,
                 "discount": discount,
                 "image": image,
                 "time": time,
@@ -195,7 +195,6 @@ extension OrderListVC: SQIPCardEntryViewControllerDelegate {
                 "isCouponUsed": isCouponUsed,
                 "name": name,
                 "price": price,
-                "branch": branch,
                 "discount": discount,
                 "image": image,
                 "time": time,
@@ -219,6 +218,7 @@ extension OrderListVC: SQIPCardEntryViewControllerDelegate {
     }
 }
 
+/*인앱 결제
 class ChargeApi {
     static public func processPayment(amount: Int, nonce: String, completion: @escaping (String?, String?) -> Void) {
         let url = URL(string: Constants.Square.CHARGE_URL)!
@@ -262,7 +262,7 @@ class ChargeApi {
             }
         }.resume()
     }
-}
+} 인앱결제 */
 
 
 extension OrderListVC {
