@@ -7,9 +7,9 @@
 
 import UIKit
 import FirebaseFirestore
-import SquareInAppPaymentsSDK
+//import SquareInAppPaymentsSDK
 
-//카드 결제(후배한테 빌린것)
+//인앱카드결제
 /* struct Constants {
 
     struct Square {
@@ -120,7 +120,7 @@ extension OrderListVC: OrderViewControllerDelegate {
         present(alert, animated: true, completion: nil)
     }
 }
-
+/*
 extension OrderListVC: SQIPCardEntryViewControllerDelegate {
     func cardEntryViewController(_ cardEntryViewController: SQIPCardEntryViewController, didCompleteWith status: SQIPCardEntryCompletionStatus) {
         dismiss(animated: true) {
@@ -146,9 +146,9 @@ extension OrderListVC: SQIPCardEntryViewControllerDelegate {
             }
             return completionHandler(nil)
         }
-    }
+    } */
     
-    func makeOrderAndReceipt() {
+    func makeOrderAndReceipt() { //관련 상업용 결제 api 연동하면 정석대로 나올거라 예상 후에 필요없는 func이 될수도
         
         let user = UserDefaults.currentUser
         let userId = user?.id ?? ""
@@ -159,7 +159,6 @@ extension OrderListVC: SQIPCardEntryViewControllerDelegate {
             let coffee = order["order"] as? [String: Any]
             let name = coffee?["name"] as? String ?? ""
             let price = coffee?["price"] as? String ?? ""
-            let branch = coffee?["branch"] as? String ?? ""
             let discount = coffee?["discount"] as? String ?? ""
             let image = coffee?["image"] as? String ?? ""
             let time = Timestamp(date: Date())
