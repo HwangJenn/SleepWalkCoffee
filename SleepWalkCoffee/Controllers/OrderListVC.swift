@@ -266,14 +266,14 @@ class ChargeApi {
 
 
 extension OrderListVC {
-    func makeCardEntryViewController() -> SQIPCardEntryViewController {
+    /* func makeCardEntryViewController() -> SQIPCardEntryViewController {
         let theme = SQIPTheme()
         theme.errorColor = .red
         theme.tintColor = UIColor.black
         theme.keyboardAppearance = .dark
         theme.saveButtonTitle = "Pay"
         return SQIPCardEntryViewController(theme: theme)
-    }
+    } */
 }
 
 extension OrderListVC: UIViewControllerTransitioningDelegate {

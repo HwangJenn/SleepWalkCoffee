@@ -18,7 +18,7 @@ class OrderView : UIView {
         return view
     }()
 
-    lazy var addCardButton = ActionButton(backgroundColor: UIColor.black, title: "신용 카드 결제", image: nil) //인앱?
+  //  lazy var addCardButton = ActionButton(backgroundColor: UIColor.black, title: "신용 카드 결제", image: nil) //인앱?
     private lazy var headerView = HeaderView(title: "주문하기")
 
     var closeButton: UIButton {
@@ -39,7 +39,7 @@ class OrderView : UIView {
         backgroundColor = UIColor.white
         stackView.addArrangedSubview(headerView)
         stackView.addArrangedSubview(TableRowView(heading: "Total", title: "₩\(actualPrice)", subtitle:""))
-        stackView.addArrangedSubview(addCardButton)
+       // stackView.addArrangedSubview(addCardButton)
         addSubview(stackView)
         stackView.pinToTop(ofView: self)
     }
