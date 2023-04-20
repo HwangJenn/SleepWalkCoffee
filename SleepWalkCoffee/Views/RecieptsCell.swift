@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import Accessibility
 
 class RecieptsCell: UITableViewCell {
 

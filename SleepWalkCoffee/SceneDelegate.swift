@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Accessibility
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

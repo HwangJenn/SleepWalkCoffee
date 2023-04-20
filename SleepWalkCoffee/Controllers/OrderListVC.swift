@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseFirestore
 //import SquareInAppPaymentsSDK
+import Accessibility
 
 //인앱카드결제
 /* struct Constants {

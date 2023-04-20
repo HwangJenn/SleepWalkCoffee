@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Accessibility
 
 extension UIImageView {
     

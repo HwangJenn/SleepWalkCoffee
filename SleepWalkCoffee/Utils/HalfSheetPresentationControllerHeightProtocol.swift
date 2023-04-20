@@ -15,6 +15,7 @@
 //
 
 import UIKit
+import Accessibility
 
 protocol HalfSheetPresentationControllerHeightProtocol: AnyObject {
     var halfsheetHeight: CGFloat { get }

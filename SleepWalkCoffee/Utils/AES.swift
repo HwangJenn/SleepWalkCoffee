@@ -7,6 +7,7 @@
 
 import Foundation
 import CommonCrypto
+import Accessibility
 
 struct AES256 {
     private var key: Data

@@ -8,7 +8,8 @@
 import UIKit
 import FirebaseCore
 import IQKeyboardManagerSwift
-import SquareInAppPaymentsSDK
+// import SquareInAppPaymentsSDK 인앱결제
+import Accessibility
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
