@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "FIRStorageTypedefs 3.h"
 #import "FIRStorageTypedefs.h"
 
 FOUNDATION_EXPORT double FirebaseStorageVersionNumber;

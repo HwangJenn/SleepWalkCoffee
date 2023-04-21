@@ -48,14 +48,16 @@
 		2DE447DB29E2D10700FF404E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE447DA29E2D10700FF404E /* Extensions.swift */; };
 		2DE447E029E2D4B200FF404E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2DE447DF29E2D4B200FF404E /* FirebaseAnalytics */; };
 		2DE447E229E2D4B200FF404E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 2DE447E129E2D4B200FF404E /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		E7790A90AD5F271B3749CB2C /* Pods_SleepWalkCoffee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A523158971C67638900224 /* Pods_SleepWalkCoffee.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13A523158971C67638900224 /* Pods_SleepWalkCoffee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SleepWalkCoffee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D6F733D29ED207500195518 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
 		2D9100EA29F0D24600AE8373 /* Accessibility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accessibility.framework; path = System/Library/Frameworks/Accessibility.framework; sourceTree = SDKROOT; };
 		2D9100EC29F0D31400AE8373 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2D9100EE29F0D35600AE8373 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		2DE4478529E2BE7400FF404E /* SleepWalkCoffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SleepWalkCoffee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DE4478529E2BE7400FF404E /* SleepWalkCoffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SleepWalkCoffee.app; path = "/Users/hwangjihyeon/Desktop/SleepWalkCoffee/build/Debug-iphoneos/SleepWalkCoffee.app"; sourceTree = "<absolute>"; };
 		2DE4478829E2BE7400FF404E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DE4478A29E2BE7400FF404E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2DE4478C29E2BE7400FF404E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				2D9100EF29F0D35700AE8373 /* CoreFoundation.framework in Frameworks */,
 				2D9100ED29F0D31400AE8373 /* CoreGraphics.framework in Frameworks */,
 				2D9100EB29F0D24600AE8373 /* Accessibility.framework in Frameworks */,
+				E7790A90AD5F271B3749CB2C /* Pods_SleepWalkCoffee.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,18 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				2DE4478729E2BE7400FF404E /* SleepWalkCoffee */,
-				2DE4478629E2BE7400FF404E /* Products */,
 				C196BDC40E58B561F4209724 /* Pods */,
 				B6C37B2C0D987F13A7185708 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		2DE4478629E2BE7400FF404E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2DE4478529E2BE7400FF404E /* SleepWalkCoffee.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		2DE4478729E2BE7400FF404E /* SleepWalkCoffee */ = {
@@ -212,6 +206,7 @@
 				2D9100EE29F0D35600AE8373 /* CoreFoundation.framework */,
 				2D9100EC29F0D31400AE8373 /* CoreGraphics.framework */,
 				2D9100EA29F0D24600AE8373 /* Accessibility.framework */,
+				13A523158971C67638900224 /* Pods_SleepWalkCoffee.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -278,7 +273,7 @@
 			packageReferences = (
 				2DE447DE29E2D4B200FF404E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
-			productRefGroup = 2DE4478629E2BE7400FF404E /* Products */;
+			productRefGroup = 2DE4477C29E2BE7300FF404E;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

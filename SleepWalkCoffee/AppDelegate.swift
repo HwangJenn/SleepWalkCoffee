@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        SQIPInAppPaymentsSDK.squareApplicationID = Constants.Square.APPLICATION_ID
+        //SQIPInAppPaymentsSDK.squareApplicationID = Constants.Square.APPLICATION_ID
         if UserDefaults.standard.isUserLoggedIn() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainNC = storyboard.instantiateViewController(withIdentifier: "MainNC")
