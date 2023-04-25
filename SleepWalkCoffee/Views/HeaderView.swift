@@ -15,6 +15,7 @@
 //
 
 import UIKit
+import Accessibility
 
 class HeaderView : UIStackView {
     lazy var closeButton = makeCloseButton()

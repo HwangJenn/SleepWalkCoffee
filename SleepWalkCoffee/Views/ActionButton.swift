@@ -15,6 +15,7 @@
 //
 
 import UIKit
+import Accessibility
 
 class ActionButton: UIButton {
     init(backgroundColor: UIColor, title: String?, image: UIImage?) {
