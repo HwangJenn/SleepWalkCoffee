@@ -17,6 +17,7 @@
 #ifndef FIRESTORE_CORE_SRC_LOCAL_LOCAL_DOCUMENTS_VIEW_H_
 #define FIRESTORE_CORE_SRC_LOCAL_LOCAL_DOCUMENTS_VIEW_H_
 
+#include <string>
 #include <unordered_map>
 #include <vector>
 
@@ -36,6 +37,10 @@ namespace firestore {
 namespace core {
 class Query;
 }  // namespace core
+
+namespace local {
+class LocalWriteResult;
+}  // namespace local
 
 namespace local {
 
@@ -76,6 +81,26 @@ class LocalDocumentsView {
   model::DocumentMap GetDocuments(const model::DocumentKeySet& keys);
 
   /**
+   * Given a collection group, returns the next documents that follow the
+   * provided offset, along with an updated batch ID.
+   *
+   * The documents returned by this method are ordered by remote version from
+   * the provided offset. If there are no more remote documents after the
+   * provided offset, documents with mutations in order of batch id from the
+   * offset are returned. Since all documents in a batch are returned together,
+   * the total number of documents returned can exceed count.
+   *
+   * @param collection_group The collection group for the documents.
+   * @param offset The offset to index into.
+   * @param count The number of documents to return
+   * @return A LocalWriteResult with the documents that follow the provided
+   * offset and the last processed batch id.
+   */
+  local::LocalWriteResult GetNextDocuments(const std::string& collection_group,
+                                           const model::IndexOffset& offset,
+                                           int count) const;
+
+  /**
    * Similar to `GetDocuments`, but creates the local view from the given
    * `base_docs` without retrieving documents from the local store.
    *
@@ -104,7 +129,7 @@ class LocalDocumentsView {
    * Recalculates overlays by reading the documents from remote document cache
    * first, and save them after they are calculated.
    */
-  void RecalculateAndSaveOverlays(const model::DocumentKeySet& keys);
+  void RecalculateAndSaveOverlays(const model::DocumentKeySet& keys) const;
 
   /**
    * Performs a query against the local view of all documents.
@@ -117,6 +142,8 @@ class LocalDocumentsView {
       const core::Query& query, const model::IndexOffset& offset);
 
  private:
+  friend class QueryEngine;
+
   friend class CountingQueryEngine;  // For testing
 
   /** Internal version of GetDocument that allows re-using batches. */
@@ -167,10 +194,10 @@ class LocalDocumentsView {
   model::OverlayedDocumentMap ComputeViews(
       model::MutableDocumentMap docs,
       model::OverlayByDocumentKeyMap&& overlays,
-      const model::DocumentKeySet& existence_state_changed);
+      const model::DocumentKeySet& existence_state_changed) const;
 
   model::FieldMaskMap RecalculateAndSaveOverlays(
-      model::MutableDocumentPtrMap&& docs);
+      model::MutableDocumentPtrMap&& docs) const;
 
   RemoteDocumentCache* remote_document_cache_;
   MutationQueue* mutation_queue_;

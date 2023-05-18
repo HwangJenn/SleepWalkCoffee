@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "FIRAuthInterop 5.h"
 #import "FIRAuthInterop.h"
 
 FOUNDATION_EXPORT double FirebaseAuthInteropVersionNumber;

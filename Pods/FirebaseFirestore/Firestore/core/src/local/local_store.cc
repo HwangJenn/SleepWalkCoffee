@@ -16,12 +16,14 @@
 
 #include "Firestore/core/src/local/local_store.h"
 
+#include <set>
 #include <string>
 #include <unordered_set>
 #include <utility>
 
 #include "Firestore/core/src/credentials/user.h"
 #include "Firestore/core/src/local/bundle_cache.h"
+#include "Firestore/core/src/local/index_backfiller.h"
 #include "Firestore/core/src/local/local_documents_view.h"
 #include "Firestore/core/src/local/local_view_changes.h"
 #include "Firestore/core/src/local/local_write_result.h"
@@ -39,6 +41,7 @@
 #include "Firestore/core/src/model/patch_mutation.h"
 #include "Firestore/core/src/remote/remote_event.h"
 #include "Firestore/core/src/util/log.h"
+#include "Firestore/core/src/util/set_util.h"
 #include "Firestore/core/src/util/to_string.h"
 
 namespace firebase {
@@ -58,6 +61,7 @@ using model::DocumentKeySet;
 using model::DocumentMap;
 using model::DocumentUpdateMap;
 using model::DocumentVersionMap;
+using model::FieldIndex;
 using model::ListenSequenceNumber;
 using model::MutableDocument;
 using model::MutableDocumentMap;
@@ -118,13 +122,15 @@ LocalStore::LocalStore(Persistence* persistence,
 
   persistence->reference_delegate()->AddInMemoryPins(&local_view_references_);
   target_id_generator_ = TargetIdGenerator::TargetCacheTargetIdGenerator(0);
-  query_engine_->SetLocalDocumentsView(local_documents_.get());
+  query_engine_->Initialize(local_documents_.get());
+  index_backfiller_ = absl::make_unique<IndexBackfiller>();
 }
 
 LocalStore::~LocalStore() = default;
 
 void LocalStore::Start() {
   StartMutationQueue();
+  StartIndexManager();
   overlay_migration_manager_->Run();
   TargetId target_id = target_cache_->highest_target_id();
   target_id_generator_ =
@@ -133,6 +139,10 @@ void LocalStore::Start() {
 
 void LocalStore::StartMutationQueue() {
   persistence_->Run("Start MutationQueue", [&] { mutation_queue_->Start(); });
+}
+
+void LocalStore::StartIndexManager() {
+  persistence_->Run("Start IndexManager", [&] { index_manager_->Start(); });
 }
 
 DocumentMap LocalStore::HandleUserChange(const User& user) {
@@ -149,6 +159,7 @@ DocumentMap LocalStore::HandleUserChange(const User& user) {
   remote_document_cache_->SetIndexManager(index_manager_);
 
   StartMutationQueue();
+  StartIndexManager();
 
   persistence_->ReleaseOtherUserSpecificComponents(user.uid());
 
@@ -160,7 +171,7 @@ DocumentMap LocalStore::HandleUserChange(const User& user) {
     local_documents_ = absl::make_unique<LocalDocumentsView>(
         remote_document_cache_, mutation_queue_, document_overlay_cache_,
         index_manager_);
-    query_engine_->SetLocalDocumentsView(local_documents_.get());
+    query_engine_->Initialize(local_documents_.get());
 
     // Union the old/new changed keys.
     DocumentKeySet changed_keys;
@@ -406,6 +417,16 @@ bool LocalStore::ShouldPersistTargetData(const TargetData& new_target_data,
   int64_t time_delta = new_seconds - old_seconds;
   if (time_delta >= kResumeTokenMaxAgeSeconds) return true;
 
+  // Update the target cache if sufficient time has passed since the last
+  // LastLimboFreeSnapshotVersion
+  int64_t new_limbo_free_seconds =
+      new_target_data.last_limbo_free_snapshot_version().timestamp().seconds();
+  int64_t old_limbo_free_seconds =
+      old_target_data.last_limbo_free_snapshot_version().timestamp().seconds();
+  int64_t limbo_free_time_delta =
+      new_limbo_free_seconds - old_limbo_free_seconds;
+  if (limbo_free_time_delta >= kResumeTokenMaxAgeSeconds) return true;
+
   // Otherwise if the only thing that has changed about a target is its resume
   // token then it's not worth persisting. Note that the RemoteStore keeps an
   // in-memory view of the currently active targets which includes the current
@@ -454,6 +475,10 @@ void LocalStore::NotifyLocalViewChanges(
             target_data.WithLastLimboFreeSnapshotVersion(
                 last_limbo_free_snapshot_version);
         target_data_by_target_[target_id] = updated_target_data;
+
+        if (ShouldPersistTargetData(updated_target_data, target_data, {})) {
+          target_cache_->UpdateTarget(updated_target_data);
+        }
       }
     }
   });
@@ -560,6 +585,12 @@ LruResults LocalStore::CollectGarbage(LruGarbageCollector* garbage_collector) {
   });
 }
 
+int LocalStore::Backfill() const {
+  return persistence_->Run("Backfill Indexes", [&] {
+    return index_backfiller_->WriteIndexEntries(this);
+  });
+}
+
 bool LocalStore::HasNewerBundle(const bundle::BundleMetadata& metadata) {
   return persistence_->Run("Has newer bundle", [&] {
     absl::optional<bundle::BundleMetadata> cached_metadata =
@@ -632,10 +663,40 @@ void LocalStore::SaveNamedQuery(const bundle::NamedQuery& query,
   });
 }
 
+std::vector<model::FieldIndex> LocalStore::GetFieldIndexes() {
+  return persistence_->Run("Get FieldIndexes",
+                           [&] { return index_manager_->GetFieldIndexes(); });
+}
+
 absl::optional<bundle::NamedQuery> LocalStore::GetNamedQuery(
     const std::string& query) {
   return persistence_->Run("Get named query",
                            [&] { return bundle_cache_->GetNamedQuery(query); });
+}
+
+void LocalStore::ConfigureFieldIndexes(
+    std::vector<FieldIndex> new_field_indexes) {
+  // This lambda function takes a rvalue vector as parameter,
+  // then coverts it to a sorted set based on the compare function above.
+  auto convertToSet = [](std::vector<FieldIndex>&& vec) {
+    std::set<FieldIndex, FieldIndex::SemanticLess> result;
+    for (auto& index : vec) {
+      result.insert(std::move(index));
+    }
+    return result;
+  };
+
+  return persistence_->Run("Configure indexes", [&] {
+    return util::DiffSets<FieldIndex, FieldIndex::SemanticLess>(
+        convertToSet(index_manager_->GetFieldIndexes()),
+        convertToSet(std::move(new_field_indexes)), FieldIndex::SemanticCompare,
+        [this](const model::FieldIndex& index) {
+          this->index_manager_->AddFieldIndex(index);
+        },
+        [this](const model::FieldIndex& index) {
+          this->index_manager_->DeleteFieldIndex(index);
+        });
+  });
 }
 
 Target LocalStore::NewUmbrellaTarget(const std::string& bundle_id) {

@@ -12,6 +12,7 @@ pod 'FirebaseAuth' # FirebaseAuth
 pod 'FirebaseStorage' # FirebaseStorage
 pod 'FirebaseInAppMessaging' # FirebaseInAppMessaging
 pod 'FirebaseCore' # FirebaseCore
+pod 'Firebase/AnalyticsWithoutAdIdSupport'
 
   # Pods for SleepWalkCoffee
   pod 'IQKeyboardManagerSwift'
