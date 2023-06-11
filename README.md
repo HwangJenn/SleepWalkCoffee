@@ -1,6 +1,6 @@
 # SleepWalkCoffee
 ### SleepWalkCoffee 오더앱 제작중
-### [프로젝트 상세 설명][ 노션 링크 ](https://steep-jaw-d1c.notion.site/iOS-SleepWalkCoffee-App-b860ee4f947e40b1b5ec7ade914d933f)
+### [프로젝트 상세 설명]
 
 1. 앱 프로토타입
 
