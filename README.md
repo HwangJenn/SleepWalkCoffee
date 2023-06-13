@@ -1,6 +1,5 @@
 # SleepWalkCoffee
-### SleepWalkCoffee 오더앱 제작중
-### [프로젝트 상세 설명]
+### SleepWalkCoffee 오더앱 제작 중단.
 
 1. 앱 프로토타입
 
