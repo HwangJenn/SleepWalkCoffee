@@ -1,7 +1,7 @@
 # SleepWalkCoffee
 ### SleepWalkCoffee 오더앱 제작 중단.
 
-1. 앱 프로토타입
+1. 앱 화면구성
 
 ![Untitled](https://user-images.githubusercontent.com/76980015/230806594-a509f3b0-566c-4466-893e-f6104ebbeb07.png)
 
@@ -9,7 +9,7 @@
 <img width="612" alt="스크린샷 2023-04-10 오전 9 24 19" src="https://user-images.githubusercontent.com/76980015/230806385-dbc4853d-5d82-4d8b-940c-6cf9d52c14cf.png">
 
 3. 진행사항  
--앱 프로토타입에 기반한 전체적인 기능 구현  
+-앱 화면구성 설계에 기반한 전체적인 기능 구현  
 -UIKit  
 -파이어베이스 연동  
 <img width="800" alt="스크린샷 2023-04-10 오전 10 17 39" src="https://user-images.githubusercontent.com/76980015/230806783-6f42173d-537e-423b-bc2e-550be90932d5.png">  
